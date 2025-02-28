@@ -5,7 +5,7 @@ import { Plus, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
-interface Favorite {
+export interface Favorite {
   name: string
   url: string
 }

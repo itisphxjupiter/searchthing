@@ -4,13 +4,9 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { Footer } from "@/components/footer"
 import { AddToChrome } from "@/components/add-to-chrome"
 import Link from "next/link"
-import { Settings } from "lucide-react"
+import { Settings, ListFilter } from "lucide-react"
 import { useEffect, useState } from "react"
-
-interface Favorite {
-  name: string
-  url: string
-}
+import { Favorite } from "./settings/page"
 
 export default function Home() {
   const [favorites, setFavorites] = useState<Favorite[]>([])
@@ -26,6 +22,13 @@ export default function Home() {
     <div className="min-h-screen flex flex-col items-center justify-between bg-background">
       <header className="w-full p-4">
         <div className="max-w-5xl mx-auto w-full flex justify-end items-center gap-2">
+          <Link 
+            href="/bangs" 
+            className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="Bang Commands"
+          >
+            <ListFilter size={18} />
+          </Link>
           <Link 
             href="/settings" 
             className="p-2 text-muted-foreground hover:text-foreground transition-colors"
