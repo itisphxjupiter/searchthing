@@ -25,10 +25,10 @@ function SearchContent() {
   }, [q, router]);
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-12 h-12 border-4 border-gray-400 border-t-blue-500 rounded-full animate-spin"></div>
-        <p className="text-gray-400 text-lg font-medium">Redirecting...</p>
+    <div className="min-h-screen flex items-center justify-center bg-background dark:bg-gray-900">
+      <div className="relative w-16 h-16">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur opacity-25 group-hover:opacity-40"></div>
+        <div className="relative w-full h-full border-4 border-gray-400/20 border-t-purple-500 rounded-full animate-spin"></div>
       </div>
     </div>
   );
@@ -38,8 +38,8 @@ export default function Search() {
   return (
     <Suspense 
       fallback={
-        <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-          <div className="w-12 h-12 border-4 border-gray-400 border-t-blue-500 rounded-full animate-spin"></div>
+        <div className="min-h-screen flex items-center justify-center bg-background dark:bg-gray-900">
+          <div className="w-16 h-16 border-4 border-gray-400/20 border-t-purple-500 rounded-full animate-spin"></div>
         </div>
       }
     >
