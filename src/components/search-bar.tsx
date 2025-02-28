@@ -13,7 +13,7 @@ export function SearchBar() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (query.trim()) {
-      window.location.href = `https://searchthing.xyz/?q=${encodeURIComponent(query)}`
+      window.location.href = `https://searchthing.xyz/search?q=${encodeURIComponent(query)}`
     }
   }
 
