@@ -13,6 +13,7 @@ export function SearchBar() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (query.trim()) {
+      // Updated to use the searchthing.xyz URL format
       window.location.href = `https://searchthing.xyz/search?q=${encodeURIComponent(query)}`
     }
   }
@@ -24,14 +25,14 @@ export function SearchBar() {
         <div className="relative flex items-center w-full">
           <div className="relative flex-1">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-              <Search size={18} />
+              <Search size={18}/>
             </div>
             <Input
               type="text"
               placeholder="Search the web..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full pl-10 pr-20 py-6 rounded-lg border-input focus-visible:ring-2 focus-visible:ring-purple-500"
+              className="w-full pl-10 pr-20 py-6 rounded-lg border-input focus-visible:ring-0 focus-visible:ring-purple-500"
             />
           </div>
           <Button
