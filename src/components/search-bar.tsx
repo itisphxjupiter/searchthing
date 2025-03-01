@@ -15,6 +15,10 @@ export function SearchBar() {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (inputRef.current && document.activeElement !== inputRef.current) {
+        if (
+          event.target instanceof HTMLInputElement ||
+          !event.key.match(/^[a-zA-Z0-9\s!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]$/)
+        ) return
         inputRef.current.focus()
         inputRef.current.value = event.key // Insert the first key pressed
         setQuery(event.key) // Update state to reflect input
