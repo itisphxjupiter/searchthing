@@ -23,6 +23,7 @@ export function AddToChrome() {
   }
 
   return (
+    <div id="add-extension-button">
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline" size="sm" className="text-xs">
@@ -81,6 +82,7 @@ export function AddToChrome() {
         </div>
       </DialogContent>
     </Dialog>
+    </div>
   )
 }
 
