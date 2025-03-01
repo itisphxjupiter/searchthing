@@ -4,9 +4,15 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { Footer } from "@/components/footer"
 import { AddToChrome } from "@/components/add-to-chrome"
 import Link from "next/link"
-import { Settings, ListFilter } from "lucide-react"
+import { Settings, CircleAlert } from "lucide-react"
 import { useEffect, useState } from "react"
 import { Favorite } from "./settings/page"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 export default function Home() {
   const [favorites, setFavorites] = useState<Favorite[]>([])
@@ -22,21 +28,48 @@ export default function Home() {
     <div className="min-h-screen flex flex-col items-center justify-between bg-background">
       <header className="w-full p-4">
         <div className="max-w-5xl mx-auto w-full flex justify-end items-center gap-2">
-          <Link 
-            href="/bangs" 
-            className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="Bang Commands"
-          >
-            <ListFilter size={18} />
-          </Link>
-          <Link 
-            href="/settings" 
-            className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="Settings"
-          >
-            <Settings size={18} />
-          </Link>
-          <ThemeToggle />
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link 
+                  href="/bangs" 
+                  className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                  aria-label="Bang Commands"
+                >
+                  <CircleAlert size={18} />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Bang Commands</p>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link 
+                  href="/settings" 
+                  className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                  aria-label="Settings"
+                >
+                  <Settings size={18} />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Settings</p>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div>
+                  <ThemeToggle />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Toggle Theme</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </header>
 
