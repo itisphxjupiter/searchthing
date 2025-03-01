@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,11 +10,25 @@ import { bangs } from "@/app/bang"
 
 export function SearchBar() {
   const [query, setQuery] = useState("")
+  const inputRef = useRef<HTMLInputElement | null>(null)
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (inputRef.current && document.activeElement !== inputRef.current) {
+        inputRef.current.focus()
+        inputRef.current.value = event.key // Insert the first key pressed
+        setQuery(event.key) // Update state to reflect input
+        event.preventDefault()
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (query.trim()) {
-      // Updated to use the searchthing.xyz URL format
       window.location.href = `https://searchthing.xyz/search?q=${encodeURIComponent(query)}`
     }
   }
@@ -26,9 +40,10 @@ export function SearchBar() {
         <div className="relative flex items-center w-full">
           <div className="relative flex-1">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-              <Search size={18}/>
+              <Search size={18} />
             </div>
             <Input
+              ref={inputRef}
               type="text"
               placeholder="Search the web..."
               value={query}
@@ -47,4 +62,3 @@ export function SearchBar() {
     </form>
   )
 }
-
