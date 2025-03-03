@@ -8,8 +8,10 @@ function SearchContent() {
   const searchParams = useSearchParams();
   const q = searchParams.get('q');
 
+
   useEffect(() => {
     if (!q) return;
+    let searchUrl;
 
     const query = q;
     const match = query.match(/!(\S+)/i);
@@ -17,7 +19,11 @@ function SearchContent() {
     const defaultBang = bangs.find(b => b.t === 'g') || bangs[0];
     const selectedBang = bangs.find(b => b.t === bangCandidate) || defaultBang;
     const cleanQuery = query.replace(/!\S+\s*/i, '').trim();
-    const searchUrl = selectedBang.u.replace('{{{s}}}', encodeURIComponent(cleanQuery));
+    if (cleanQuery == "") {
+      searchUrl = "https://" + selectedBang.d;
+    } else {
+      searchUrl = selectedBang.u.replace('{{{s}}}', encodeURIComponent(cleanQuery));
+    }
 
     if (searchUrl) {
       router.replace(searchUrl);
