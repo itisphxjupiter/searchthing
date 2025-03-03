@@ -1,5 +1,3 @@
-// This file was (mostly) ripped from https://duckduckgo.com/bang.js
-
 export const bangs = [
   {
     c: "Search",
@@ -9,6 +7,22 @@ export const bangs = [
     t: "g",
     u: "https://www.google.com/search?q={{{s}}}",
   },
+  {
+    c: "Search",
+    d: "www.duckduckgo.com",
+    s: "DuckDuckGo",
+    sc: "Search",
+    t: "dd",
+    u: "https://duckduckgo.com/?q={{{s}}}",
+  },
+  {
+    c: "Search",
+    d: "www.bing.com",
+    s: "Bing",
+    sc: "Search",
+    t: "b",
+    u: "https://www.bing.com/search?q={{{s}}}"
+},
   {
     c: "Wiki",
     d: "www.wikipedia.org",
@@ -26,6 +40,22 @@ export const bangs = [
     u: "https://store.steampowered.com/search/?term={{{s}}}",
   },
   {
+    c: "Gaming",
+    d: "store.epicgames.com",
+    s: "Epic Games",
+    sc: "Gaming",
+    t: "epic",
+    u: "https://store.epicgames.com/en-US/browse?q={{{s}}}",
+  },
+  {
+    c: "Gaming",
+    d: "instant-gaming.com",
+    s: "Instant Gaming",
+    sc: "Gaming",
+    t: "ig",
+    u: "https://www.instant-gaming.com/en/search/?query={{{s}}}",
+  },
+  {
     c: "Social",
     d: "twitter.com",
     s: "X (Twitter)",
@@ -33,6 +63,22 @@ export const bangs = [
     t: "x",
     u: "https://twitter.com/search?q={{{s}}}",
   },
+  {
+    c: "Social",
+    d: "facebook.com",
+    s: "Facebook",
+    sc: "Social",
+    t: "fb",
+    u: "https://www.facebook.com/search/top?q={{{s}}}"
+},
+{
+  c: "Social",
+  d: "instagram.com",
+  s: "Instagram",
+  sc: "Social",
+  t: "insta",
+  u: "https://www.instagram.com/explore/tags/{{{s}}}/"
+},
   {
     c: "Shopping",
     d: "www.ebay.com",
@@ -58,14 +104,6 @@ export const bangs = [
     u: "https://github.com/{{{s}}}",
   },
   {
-    c: "Streaming",
-    d: "netflix.com",
-    s: "Netflix",
-    sc: "Streaming",
-    t: "nf",
-    u: "https://www.netflix.com/search?q={{{s}}}",
-  },
-  {
     c: "Dev",
     d: "stackoverflow.com",
     s: "Stack Overflow",
@@ -75,12 +113,52 @@ export const bangs = [
   },
   {
     c: "Streaming",
+    d: "netflix.com",
+    s: "Netflix",
+    sc: "Streaming",
+    t: "nf",
+    u: "https://www.netflix.com/search?q={{{s}}}",
+  },
+  {
+    c: "Streaming",
     d: "amazon.com",
     s: "Prime Video",
     sc: "Streaming",
     t: "pv",
     u: "https://www.amazon.com/s?k={{{s}}}&i=instant-video",
   },
+  {
+    c: "Streaming",
+    d: "www.twitch.tv",
+    s: "Twitch",
+    sc: "Streaming",
+    t: "tw",
+    u: "https://www.twitch.tv/search?term={{{s}}}",
+  },
+  {
+    c: "Streaming",
+    d: "www.imdb.com",
+    s: "IMDB",
+    sc: "Information",
+    t: "imdb",
+    u: "https://www.imdb.com/find?q={{{s}}}",
+  },
+  {
+    c: "Video",
+    d: "youtube.com",
+    s: "YouTube",
+    sc: "Video",
+    t: "yt",
+    u: "https://www.youtube.com/results?search_query={{{s}}}",
+  },
+  {
+    c: "Video",
+    d: "vimeo.com",
+    s: "Vimeo",
+    sc: "Video",
+    t: "vi",
+    u: "https://vimeo.com/search?q={{{s}}}"
+},
   {
     c: "AI",
     d: "www.t3.chat",
@@ -114,13 +192,13 @@ export const bangs = [
     u: "https://www.perplexity.ai/search?q={{{s}}}",
   },
   {
-    c: "Video",
-    d: "youtube.com",
-    s: "YouTube",
-    sc: "Video",
-    t: "yt",
-    u: "https://www.youtube.com/results?search_query={{{s}}}",
-  },
+    c: "AI",
+    d: "huggingface.co",
+    s: "Hugging Face",
+    sc: "AI",
+    t: "hf",
+    u: "https://huggingface.co/spaces?query={{{s}}}"
+},
   {
     c: "Maps",
     d: "maps.google.com",
@@ -138,20 +216,28 @@ export const bangs = [
     u: "https://www.npmjs.com/search?q={{{s}}}",
   },
   {
-    c: "Shopping",
-    d: "amazon.com",
-    s: "Amazon",
-    sc: "Shopping",
-    t: "a",
-    u: "https://www.amazon.com/s?k={{{s}}}",
-  },
-  {
     c: "Dev",
     d: "docs.rs",
     s: "Rust Docs",
     sc: "Dev",
     t: "rs",
     u: "https://docs.rs/search?query={{{s}}}",
+  },
+  {
+    c: "Dev",
+    d: "dev.to",
+    s: "Dev.to",
+    sc: "Dev",
+    t: "dev",
+    u: "https://dev.to/search?q={{{s}}}"
+},
+  {
+    c: "Shopping",
+    d: "amazon.com",
+    s: "Amazon",
+    sc: "Shopping",
+    t: "a",
+    u: "https://www.amazon.com/s?k={{{s}}}",
   },
   {
     c: "Music",
@@ -194,12 +280,12 @@ export const bangs = [
     u: "https://unsplash.com/s/photos/{{{s}}}",
   },
   {
-    c: "Translation",
-    d: "translate.google.com",
-    s: "Google Translate",
-    sc: "Tools",
-    t: "tr",
-    u: "https://translate.google.com/?text={{{s}}}",
+    c: "Images",
+    d: "pixabay.com",
+    s: "Pixabay",
+    sc: "Images",
+    t: "pxb",
+    u: "https://pixabay.com/images/search/{{{s}}}/",
   },
   {
     c: "Images",
@@ -208,5 +294,38 @@ export const bangs = [
     sc: "Images",
     t: "gi",
     u: "https://www.google.com/search?tbm=isch&q={{{s}}}",
-  }
+  },
+  {
+    c: "Translation",
+    d: "translate.google.com",
+    s: "Google Translate",
+    sc: "Tools",
+    t: "tr",
+    u: "https://translate.google.com/?text={{{s}}}",
+  },
+  {
+    c: "Domain",
+    d: "www.namecheap.com",
+    s: "Namecheap",
+    sc: "Domain",
+    t: "domain",
+    u: "https://www.namecheap.com/domains/registration/results/?domain={{{s}}}",
+  },
+  {
+    c: "News",
+    d: "news.google.com",
+    s: "Google News",
+    sc: "News",
+    t: "gn",
+    u: "https://news.google.com/search?q={{{s}}}"
+},
+{
+  c: "News",
+  d: "bbc.com",
+  s: "BBC News",
+  sc: "News",
+  t: "bbc",
+  u: "https://www.bbc.co.uk/search?q={{{s}}}"
+},
+
 ];

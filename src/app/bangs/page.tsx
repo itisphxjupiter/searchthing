@@ -4,9 +4,19 @@ import { bangs } from "../bang"
 import Link from "next/link"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Footer } from "@/components/footer"
-import { ArrowLeft, Search } from "lucide-react"
+import { ArrowLeft, Search, Plus, Github, Mail, X } from "lucide-react"
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 
 export default function BangsPage() {
   const [search, setSearch] = useState("")
@@ -23,7 +33,7 @@ export default function BangsPage() {
   })
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-background relative">
       <header className="w-full p-4 flex-none">
         <div className="max-w-5xl mx-auto w-full flex justify-between items-center">
           <Link 
@@ -37,7 +47,7 @@ export default function BangsPage() {
         </div>
       </header>
 
-      <main className="flex-1 container max-w-5xl mx-auto px-4 py-12">
+      <main className="flex-1 container max-w-5xl mx-auto px-4 py-12 relative">
         <div className="text-center space-y-4 mb-12">
           <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
             Bang Commands
@@ -108,6 +118,83 @@ export default function BangsPage() {
             ))}
           </div>
         </div>
+        
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button 
+              className="fixed bottom-6 right-6 z-10 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2 rounded-lg h-14 px-5"
+            >
+              <Plus size={20} />
+              <span className="font-medium">Add Bang</span>
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md border-purple-500/20">
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
+                Contribute a Bang
+              </DialogTitle>
+              <DialogDescription className="text-base">
+                Help improve SearchThing by adding your favorite site
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-6 py-4">
+              <div className="space-y-3 rounded-lg border p-4 hover:bg-accent/50 transition-colors">
+                <h3 className="font-semibold flex items-center gap-2">
+                  <Github size={18} />
+                  Create a Pull Request
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  Add your bang to the repository by submitting a PR on GitHub.
+                </p>
+                <Button 
+                  variant="outline" 
+                  className="w-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20 transition-all duration-200"
+                  onClick={() => window.open("https://github.com/eliasnau/searchthing", "_blank")}
+                >
+                  Open GitHub Repository
+                </Button>
+              </div>
+              
+              <div className="space-y-3 rounded-lg border p-4 hover:bg-accent/50 transition-colors">
+                <h3 className="font-semibold flex items-center gap-2">
+                  <Mail size={18} />
+                  Send an Email
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  Email us with the site name, URL pattern, and preferred bang command.
+                </p>
+                <Button 
+                  variant="outline"
+                  className="w-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20 transition-all duration-200"
+                  onClick={() => window.location.href = "mailto:contact@eliasnau.dev?subject=New%20Bang%20Suggestion"}
+                >
+                  Send Email
+                </Button>
+              </div>
+              
+              <div className="space-y-3 rounded-lg border p-4">
+                <h3 className="font-semibold">Bang Format</h3>
+                <pre className="bg-muted p-3 rounded-md text-xs overflow-auto font-mono">
+{`{
+  c: "Category",     // Main category
+  d: "domain.com",   // Base domain
+  s: "Site Name",    // Display name
+  sc: "Subcategory", // Sub-category
+  t: "bang",         // Bang command
+  u: "https://..."   // Search URL pattern
+}`}
+                </pre>
+              </div>
+            </div>
+            <DialogClose asChild>
+              <Button 
+                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600"
+              >
+                Close
+              </Button>
+            </DialogClose>
+          </DialogContent>
+        </Dialog>
       </main>
 
       <Footer />
