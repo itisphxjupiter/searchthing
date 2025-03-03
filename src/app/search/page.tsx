@@ -22,7 +22,7 @@ function SearchContent() {
     if (cleanQuery == "") {
       searchUrl = "https://" + selectedBang.d;
     } else {
-      searchUrl = selectedBang.u.replace('{{{s}}}', encodeURIComponent(cleanQuery));
+      searchUrl = selectedBang.u.replace('{{{s}}}', encodeURIComponent(cleanQuery).replace(/%2F/g, "/"));
     }
 
     if (searchUrl) {
