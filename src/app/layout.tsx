@@ -39,6 +39,7 @@ export const metadata = {
   },
   verification: {
     google: '4fe27WCmJ6kGNx9cRxdU3hGVERDikayxGTzpScCeJ7Y',
+    yandex: '1591d355ec0126d9',
   },
 }
 
