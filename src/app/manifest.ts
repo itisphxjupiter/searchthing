@@ -2,9 +2,9 @@ import type { MetadataRoute } from 'next'
  
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Next.js PWA',
-    short_name: 'NextPWA',
-    description: 'A Progressive Web App built with Next.js',
+    name: 'SearchThing',
+    short_name: 'SearchThing',
+    description: 'A minimalist search engine with powerful bang commands for quick access to your favorite sites',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',
