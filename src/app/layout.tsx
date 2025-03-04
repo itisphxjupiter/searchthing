@@ -30,7 +30,7 @@ export const metadata = {
     description: 'A minimalist search engine with powerful bang commands for quick access to your favorite sites',
   },
   verification: {
-    google: 'your-google-verification-code', // You'll get this from Google Search Console
+    google: '4fe27WCmJ6kGNx9cRxdU3hGVERDikayxGTzpScCeJ7Y',
   },
 }
 
