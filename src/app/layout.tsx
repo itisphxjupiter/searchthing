@@ -15,6 +15,14 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: 'SearchThing - Simple Search & Bang Commands',
   description: 'A minimalist search engine with powerful bang commands for quick access to your favorite sites',
+  keywords: [
+    'searchthing',
+    'SearchThing',
+    'Search Thing',
+    'search',
+    'bangs',
+    'search engine',
+  ],
   metadataBase: new URL('https://searchthing.xyz'),
   openGraph: {
     title: 'SearchThing - Simple Search with Bang Commands',
