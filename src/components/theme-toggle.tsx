@@ -1,32 +1,34 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Moon, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useTheme } from "next-themes"
 
 export function ThemeToggle() {
-  const [isDarkMode, setIsDarkMode] = useState(false)
-
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  
+  // After mounting, we have access to the theme
   useEffect(() => {
-    // Check if user has a theme preference in localStorage
-    const savedTheme = localStorage.getItem("theme")
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-
-    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
-      setIsDarkMode(true)
-      document.documentElement.classList.add("dark")
-    }
+    setMounted(true)
   }, [])
 
   const toggleTheme = () => {
-    if (isDarkMode) {
-      document.documentElement.classList.remove("dark")
-      localStorage.setItem("theme", "light")
-    } else {
-      document.documentElement.classList.add("dark")
-      localStorage.setItem("theme", "dark")
-    }
-    setIsDarkMode(!isDarkMode)
+    setTheme(theme === "dark" ? "light" : "dark")
+  }
+
+  // Prevent hydration mismatch by rendering a placeholder during SSR
+  if (!mounted) {
+    return (
+      <Button
+        variant="ghost"
+        size="icon"
+        aria-label="Toggle theme"
+      >
+        <Moon size={20} />
+      </Button>
+    )
   }
 
   return (
@@ -34,9 +36,9 @@ export function ThemeToggle() {
       variant="ghost"
       size="icon"
       onClick={toggleTheme}
-      aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+      aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
     >
-      {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+      {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
     </Button>
   )
 }
