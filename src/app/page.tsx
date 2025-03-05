@@ -17,12 +17,14 @@ import { SocialLinks } from "@/components/social-links"
 
 export default function Home() {
   const [favorites, setFavorites] = useState<Favorite[]>([])
+  const [favoritesLoaded, setFavoritesLoaded] = useState(false)
 
   useEffect(() => {
     const saved = localStorage.getItem('favorites')
     if (saved) {
       setFavorites(JSON.parse(saved))
     }
+    setFavoritesLoaded(true)
   }, [])
 
   return (
@@ -87,7 +89,9 @@ export default function Home() {
           <SearchBar />
           
           {/* Favorites */}
-          {favorites.length > 0 ? (
+          {!favoritesLoaded ? (
+            <div className="h-6"></div> // Empty placeholder with same height
+          ) : favorites.length > 0 ? (
             <div className="flex flex-wrap justify-center gap-2">
               {favorites.map((favorite) => (
                 <a
