@@ -4,7 +4,7 @@ import { bangs } from "../bang"
 import Link from "next/link"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Footer } from "@/components/footer"
-import { ArrowLeft, Search, Plus, Github, Mail, X } from "lucide-react"
+import { ArrowLeft, Search, Plus, Github, Mail, X, Heart } from "lucide-react"
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import {
@@ -43,18 +43,48 @@ export default function BangsPage() {
             <ArrowLeft size={18} />
             <span>Back</span>
           </Link>
-          <ThemeToggle />
+          <div className="flex items-center gap-3">
+            <a 
+              href="https://github.com/eliasnau/searchthing" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+            >
+              <Github size={18} />
+              <span className="text-xs">GitHub</span>
+            </a>
+            <a 
+              href="https://ko-fi.com/eliasnau" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 px-2 py-1 rounded-md bg-pink-50 dark:bg-pink-950/30 text-pink-600 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900/30 transition-colors"
+            >
+              <Heart size={14} className="text-pink-500" />
+              <span className="text-xs">Donate</span>
+            </a>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
       <main className="flex-1 container max-w-5xl mx-auto px-4 py-12 relative">
-        <div className="text-center space-y-4 mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
+        <div className="text-center space-y-6 mb-12">
+          <h1 className="text-4xl sm:text-6xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
             Bang Commands
           </h1>
-          <p className="text-muted-foreground">
-            Quick shortcuts to search your favorite sites directly
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Use <code className="bg-muted px-1 py-0.5 rounded text-xs">!</code> followed by a command to search directly on your favorite sites.
           </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
+            <div className="bg-muted/50 p-3 rounded-lg">
+              <code className="font-bold">macbook !a</code>
+              <span className="text-muted-foreground ml-2"> → Search Amazon for "macbook"</span>
+            </div>
+            <div className="bg-muted/50 p-3 rounded-lg">
+              <code className="font-bold">!yt coding</code>
+              <span className="text-muted-foreground ml-2"> → Search YouTube for "coding"</span>
+            </div>
+          </div>
         </div>
 
         <div className="space-y-8">
@@ -122,13 +152,13 @@ export default function BangsPage() {
         <Dialog>
           <DialogTrigger asChild>
             <Button 
-              className="fixed bottom-6 right-6 z-10 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2 rounded-lg h-14 px-5"
+              className="fixed bottom-6 right-6 z-10 bg-foreground text-background hover:bg-foreground/90 border-0 shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2 rounded-full h-14 w-14 p-0 justify-center"
+              aria-label="Add Bang"
             >
-              <Plus size={20} />
-              <span className="font-medium">Add Bang</span>
+              <Plus size={24} />
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-md border-purple-500/20">
+          <DialogContent className="sm:max-w-md">
             <DialogHeader>
               <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
                 Contribute a Bang
@@ -137,6 +167,7 @@ export default function BangsPage() {
                 Help improve SearchThing by adding your favorite site
               </DialogDescription>
             </DialogHeader>
+            
             <div className="space-y-6 py-4">
               <div className="space-y-3 rounded-lg border p-4 hover:bg-accent/50 transition-colors">
                 <h3 className="font-semibold flex items-center gap-2">
@@ -188,7 +219,7 @@ export default function BangsPage() {
             </div>
             <DialogClose asChild>
               <Button 
-                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600"
+                className="w-full bg-foreground text-background hover:bg-foreground/90"
               >
                 Close
               </Button>

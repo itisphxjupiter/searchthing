@@ -14,14 +14,21 @@ export function SearchBar() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      // Skip if using modifier keys (CMD, CTRL, etc.)
+      if (event.metaKey || event.ctrlKey || event.altKey) {
+        return
+      }
+
       if (inputRef.current && document.activeElement !== inputRef.current) {
         if (
           event.target instanceof HTMLInputElement ||
+          event.target instanceof HTMLTextAreaElement ||
           !event.key.match(/^[a-zA-Z0-9\s!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]$/)
         ) return
+
         inputRef.current.focus()
-        inputRef.current.value = event.key // Insert the first key pressed
-        setQuery(event.key) // Update state to reflect input
+        const newValue = inputRef.current.value + event.key
+        setQuery(newValue)
         event.preventDefault()
       }
     }

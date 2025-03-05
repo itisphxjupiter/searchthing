@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Footer } from "@/components/footer"
-import { ArrowLeft, Plus, Trash2 } from "lucide-react"
+import { ArrowLeft, Plus, Trash2, Heart, Github } from "lucide-react"
 import { useState, useEffect } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -80,35 +80,55 @@ export default function SettingsPage() {
         <div className="max-w-5xl mx-auto w-full flex justify-between items-center">
           <Link 
             href="/" 
-            className="p-2 text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 cursor-pointer"
+            className="p-2 text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
           >
             <ArrowLeft size={18} />
             <span>Back</span>
           </Link>
-          <ThemeToggle />
+          <div className="flex items-center gap-3">
+            <a 
+              href="https://github.com/eliasnau/searchthing" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+            >
+              <Github size={18} />
+              <span className="text-xs">GitHub</span>
+            </a>
+            <a 
+              href="https://ko-fi.com/eliasnau" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 px-2 py-1 rounded-md bg-pink-50 dark:bg-pink-950/30 text-pink-600 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900/30 transition-colors"
+            >
+              <Heart size={14} className="text-pink-500" />
+              <span className="text-xs">Donate</span>
+            </a>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
-      <main className="flex-1 container max-w-5xl mx-auto px-4 py-12">
+      <main className="flex-1 container max-w-5xl mx-auto px-4 py-12 relative">
         <div className="text-center space-y-4 mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
+          <h1 className="text-4xl sm:text-6xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
             Settings
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             Customize your search experience
           </p>
         </div>
 
         <div className="space-y-12 max-w-2xl mx-auto">
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-semibold">Favorites</h2>
+            <h2 className="text-2xl font-semibold">Favorites</h2>
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-sm text-muted-foreground">Add your favorite websites for quick access on the homepage</p>
               <div className="flex items-center gap-2">
                 <Label className="text-sm text-muted-foreground">Show on homepage</Label>
                 <Switch
                   checked={settings.showFavorites}
                   onCheckedChange={(checked) => updateSettings({ showFavorites: checked })}
-                  className="cursor-pointer"
                 />
               </div>
             </div>
@@ -116,23 +136,21 @@ export default function SettingsPage() {
             <div className="space-y-4">
               <div className="flex gap-4">
                 <div className="flex-1 space-y-2">
-                  <Label>Name</Label>
                   <Input
-                    placeholder="e.g., GitHub"
+                    placeholder="Name (e.g., GitHub)"
                     value={newName}
                     onChange={(e) => setNewName(e.target.value)}
-                    className="cursor-text"
                   />
                   <Input
-                    placeholder="e.g., https://github.com"
+                    placeholder="URL (e.g., https://github.com)"
                     value={newUrl}
                     onChange={(e) => setNewUrl(e.target.value)}
-                    className="cursor-text"
                   />
                 </div>
                 <Button
                   onClick={addFavorite}
-                  className="self-end bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white cursor-pointer"
+                  className="self-end bg-foreground text-background hover:bg-foreground/90"
+                  disabled={!newName || !newUrl}
                 >
                   <Plus size={18} />
                 </Button>
@@ -154,18 +172,24 @@ export default function SettingsPage() {
                         variant="ghost"
                         size="icon"
                         onClick={() => removeFavorite(index)}
-                        className="text-muted-foreground hover:text-red-500 transition-colors cursor-pointer"
+                        className="text-muted-foreground hover:text-red-500 transition-colors"
                       >
                         <Trash2 size={18} />
                       </Button>
                     </div>
                   </div>
                 ))}
+                
+                {favorites.length === 0 && (
+                  <div className="text-center py-8 text-muted-foreground bg-muted/30 rounded-lg">
+                    No favorites added yet. Add your first one above!
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
-          <Separator className="my-8" />
+          <Separator />
 
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold">Search Preferences</h2>
@@ -181,13 +205,13 @@ export default function SettingsPage() {
                   value={settings.defaultEngine}
                   onValueChange={(value) => updateSettings({ defaultEngine: value })}
                 >
-                  <SelectTrigger className="w-[140px] cursor-pointer">
+                  <SelectTrigger className="w-[140px]">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="google" className="cursor-pointer">Google</SelectItem>
-                    <SelectItem value="duckduckgo" className="cursor-pointer">DuckDuckGo</SelectItem>
-                    <SelectItem value="bing" className="cursor-pointer">Bing</SelectItem>
+                    <SelectItem value="google">Google</SelectItem>
+                    <SelectItem value="duckduckgo">DuckDuckGo</SelectItem>
+                    <SelectItem value="bing">Bing</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -202,7 +226,6 @@ export default function SettingsPage() {
                 <Switch
                   checked={settings.openInNewTab}
                   onCheckedChange={(checked) => updateSettings({ openInNewTab: checked })}
-                  className="cursor-pointer"
                 />
               </div>
 
@@ -216,7 +239,6 @@ export default function SettingsPage() {
                 <Switch
                   checked={settings.autoFocus}
                   onCheckedChange={(checked) => updateSettings({ autoFocus: checked })}
-                  className="cursor-pointer"
                 />
               </div>
             </div>
