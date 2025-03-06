@@ -1,31 +1,31 @@
-"use client"
-import { SearchBar } from "@/components/search-bar"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { Footer } from "@/components/footer"
-import { AddToChrome } from "@/components/add-to-chrome"
-import Link from "next/link"
-import { Settings, CircleAlert, Heart, Github, Chrome } from "lucide-react"
-import { useEffect, useState } from "react"
-import { Favorite } from "./settings/page"
+"use client";
+import { SearchBar } from "@/components/search-bar";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Footer } from "@/components/footer";
+import { AddToChrome } from "@/components/add-to-chrome";
+import Link from "next/link";
+import { Settings, CircleAlert, Heart, Github, Chrome } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Favorite } from "./settings/page";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { SocialLinks } from "@/components/social-links"
+} from "@/components/ui/tooltip";
+import { SocialLinks } from "@/components/social-links";
 
 export default function Home() {
-  const [favorites, setFavorites] = useState<Favorite[]>([])
-  const [favoritesLoaded, setFavoritesLoaded] = useState(false)
+  const [favorites, setFavorites] = useState<Favorite[]>([]);
+  const [favoritesLoaded, setFavoritesLoaded] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem('favorites')
+    const saved = localStorage.getItem("favorites");
     if (saved) {
-      setFavorites(JSON.parse(saved))
+      setFavorites(JSON.parse(saved));
     }
-    setFavoritesLoaded(true)
-  }, [])
+    setFavoritesLoaded(true);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-between bg-background">
@@ -34,8 +34,8 @@ export default function Home() {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Link 
-                  href="/bangs" 
+                <Link
+                  href="/bangs"
                   className="p-2 text-muted-foreground hover:text-foreground transition-colors"
                   aria-label="Bang Commands"
                 >
@@ -49,8 +49,8 @@ export default function Home() {
 
             <Tooltip>
               <TooltipTrigger asChild>
-                <Link 
-                  href="/settings" 
+                <Link
+                  href="/settings"
                   className="p-2 text-muted-foreground hover:text-foreground transition-colors"
                   aria-label="Settings"
                 >
@@ -84,10 +84,10 @@ export default function Home() {
               SearchThing
             </h1>
           </div>
-          
+
           {/* Search bar */}
           <SearchBar />
-          
+
           {/* Favorites */}
           {!favoritesLoaded ? (
             <div className="h-6"></div> // Empty placeholder with same height
@@ -105,26 +105,38 @@ export default function Home() {
             </div>
           ) : (
             <div className="text-sm text-muted-foreground">
-              <Link href="/settings" className="text-purple-500 hover:text-purple-600 transition-colors">
+              <Link
+                href="/settings"
+                className="text-purple-500 hover:text-purple-600 transition-colors"
+              >
                 Add favorites in settings
               </Link>
             </div>
           )}
         </div>
       </main>
-      
+
       {/* Bang commands info and Add to Chrome - positioned between main and footer */}
       <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-sm text-muted-foreground text-center sm:text-left">
             <p className="mb-1">
-              Use <code className="bg-muted px-1 py-0.5 rounded text-xs">!</code> for quick searches: <code className="bg-muted px-1 py-0.5 rounded text-xs">!w</code> Wikipedia, <code className="bg-muted px-1 py-0.5 rounded text-xs">!g</code> Google
+              Use{" "}
+              <code className="bg-muted px-1 py-0.5 rounded text-xs">!</code>{" "}
+              for quick searches:{" "}
+              <code className="bg-muted px-1 py-0.5 rounded text-xs">!w</code>{" "}
+              Wikipedia,{" "}
+              <code className="bg-muted px-1 py-0.5 rounded text-xs">!g</code>{" "}
+              Google
             </p>
-            <Link href="/bangs" className="text-purple-500 hover:text-purple-600 font-medium inline-block">
+            <Link
+              href="/bangs"
+              className="text-purple-500 hover:text-purple-600 font-medium inline-block"
+            >
               View all bang commands
             </Link>
           </div>
-          
+
           <div className="hidden sm:block">
             <AddToChrome />
           </div>
@@ -134,18 +146,18 @@ export default function Home() {
       <footer className="w-full p-4">
         <div className="max-w-5xl mx-auto w-full flex flex-col-reverse sm:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
           <div className="flex items-center gap-4">
-            <a 
-              href="https://github.com/eliasnau/searchthing" 
-              target="_blank" 
+            <a
+              href="https://github.com/eliasnau/searchthing"
+              target="_blank"
               rel="noopener noreferrer"
               className="hover:text-foreground transition-colors flex items-center gap-1"
             >
               <Github size={14} />
               <span>GitHub</span>
             </a>
-            <a 
-              href="https://ko-fi.com/eliasnau" 
-              target="_blank" 
+            <a
+              href="https://ko-fi.com/eliasnau"
+              target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 px-2 py-1 rounded-md bg-pink-50 dark:bg-pink-950/30 text-pink-600 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900/30 transition-colors"
             >
@@ -153,18 +165,23 @@ export default function Home() {
               <span>Donate</span>
             </a>
           </div>
-          
+
           <div className="flex items-center gap-4 mb-3 sm:mb-0">
-            <Link href="/privacy" className="hover:text-foreground transition-colors">
+            <Link
+              href="/legal/privacy"
+              className="hover:text-foreground transition-colors"
+            >
               Privacy
             </Link>
-            <Link href="/terms" className="hover:text-foreground transition-colors">
+            <Link
+              href="/legal/terms"
+              className="hover:text-foreground transition-colors"
+            >
               Terms
             </Link>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
-

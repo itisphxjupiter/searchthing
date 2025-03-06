@@ -22,5 +22,4 @@ export function Footer() {
     </footer>
   )
 }
-  
-  
+
