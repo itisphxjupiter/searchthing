@@ -1,24 +1,24 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { Footer } from "@/components/footer"
-import { ArrowLeft, Plus, Trash2, Heart, Github } from "lucide-react"
-import { useState, useEffect } from "react"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Switch } from "@/components/ui/switch"
-import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
+import Link from "next/link";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Footer } from "@/components/footer";
+import { ArrowLeft, Plus, Trash2, Heart, Github } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { bangs } from "../bang"
-import { Check, ChevronsUpDown } from "lucide-react"
+} from "@/components/ui/select";
+import { bangs } from "@/lib/bang";
+import { Check, ChevronsUpDown } from "lucide-react";
 import {
   Command,
   CommandEmpty,
@@ -26,95 +26,95 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command"
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { cn } from "@/lib/utils"
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 
 export interface Favorite {
-  name: string
-  url: string
+  name: string;
+  url: string;
 }
 
 interface Settings {
-  defaultEngine: string;  // This already exists in your code
+  defaultEngine: string; // This already exists in your code
   openInNewTab: boolean;
   showFavorites: boolean;
   autoFocus: boolean;
 }
 
 export default function SettingsPage() {
-  const [favorites, setFavorites] = useState<Favorite[]>([])
-  const [newName, setNewName] = useState("")
-  const [newUrl, setNewUrl] = useState("")
+  const [favorites, setFavorites] = useState<Favorite[]>([]);
+  const [newName, setNewName] = useState("");
+  const [newUrl, setNewUrl] = useState("");
   const [settings, setSettings] = useState<Settings>({
-    defaultEngine: 'google',
+    defaultEngine: "google",
     openInNewTab: false,
     showFavorites: true,
-    autoFocus: true
-  })
+    autoFocus: true,
+  });
 
   useEffect(() => {
-    const saved = localStorage.getItem('favorites')
+    const saved = localStorage.getItem("favorites");
     if (saved) {
-      setFavorites(JSON.parse(saved))
+      setFavorites(JSON.parse(saved));
     }
-    const savedSettings = localStorage.getItem('settings')
+    const savedSettings = localStorage.getItem("settings");
     if (savedSettings) {
-      setSettings(JSON.parse(savedSettings))
+      setSettings(JSON.parse(savedSettings));
     }
     // Check for defaultEngine in localStorage
-    const savedEngine = localStorage.getItem('defaultEngine')
+    const savedEngine = localStorage.getItem("defaultEngine");
     if (savedEngine) {
-      setSettings(prev => ({ ...prev, defaultEngine: savedEngine }))
+      setSettings((prev) => ({ ...prev, defaultEngine: savedEngine }));
     }
-  }, [])
+  }, []);
 
   const updateSettings = (newSettings: Partial<Settings>) => {
-    const updated = { ...settings, ...newSettings }
-    setSettings(updated)
-    localStorage.setItem('settings', JSON.stringify(updated))
-  }
+    const updated = { ...settings, ...newSettings };
+    setSettings(updated);
+    localStorage.setItem("settings", JSON.stringify(updated));
+  };
   const updateDefaultEngine = (value: string) => {
-    localStorage.setItem('defaultEngine', value)
-    updateSettings({ defaultEngine: value })
-  }
+    localStorage.setItem("defaultEngine", value);
+    updateSettings({ defaultEngine: value });
+  };
   const addFavorite = () => {
     if (newName && newUrl) {
-      const updated = [...favorites, { name: newName, url: newUrl }]
-      setFavorites(updated)
-      localStorage.setItem('favorites', JSON.stringify(updated))
-      setNewName("")
-      setNewUrl("")
+      const updated = [...favorites, { name: newName, url: newUrl }];
+      setFavorites(updated);
+      localStorage.setItem("favorites", JSON.stringify(updated));
+      setNewName("");
+      setNewUrl("");
     }
-  }
+  };
 
   const removeFavorite = (index: number) => {
-    const updated = favorites.filter((_, i) => i !== index)
-    setFavorites(updated)
-    localStorage.setItem('favorites', JSON.stringify(updated))
-  }
+    const updated = favorites.filter((_, i) => i !== index);
+    setFavorites(updated);
+    localStorage.setItem("favorites", JSON.stringify(updated));
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <header className="flex-none p-4 w-full">
-        <div className="flex justify-between items-center mx-auto w-full max-w-5xl">
+      <header className="flex-none w-full p-4">
+        <div className="flex items-center justify-between w-full max-w-5xl mx-auto">
           <Link
             href="/"
-            className="flex gap-2 items-center p-2 transition-colors text-muted-foreground hover:text-foreground"
+            className="flex items-center gap-2 p-2 transition-colors text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft size={18} />
             <span>Back</span>
           </Link>
-          <div className="flex gap-3 items-center">
+          <div className="flex items-center gap-3">
             <a
               href="https://github.com/eliasnau/searchthing"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex gap-1 items-center transition-colors text-muted-foreground hover:text-foreground"
+              className="flex items-center gap-1 transition-colors text-muted-foreground hover:text-foreground"
             >
               <Github size={18} />
               <span className="text-xs">GitHub</span>
@@ -123,7 +123,7 @@ export default function SettingsPage() {
               href="https://ko-fi.com/eliasnau"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex gap-1 items-center px-2 py-1 text-pink-600 bg-pink-50 rounded-md transition-colors dark:bg-pink-950/30 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900/30"
+              className="flex items-center gap-1 px-2 py-1 text-pink-600 transition-colors rounded-md bg-pink-50 dark:bg-pink-950/30 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900/30"
             >
               <Heart size={14} className="text-pink-500" />
               <span className="text-xs">Donate</span>
@@ -133,26 +133,32 @@ export default function SettingsPage() {
         </div>
       </header>
 
-      <main className="container relative flex-1 px-4 py-12 mx-auto max-w-5xl">
+      <main className="container relative flex-1 max-w-5xl px-4 py-12 mx-auto">
         <div className="mb-12 space-y-4 text-center">
           <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 sm:text-6xl">
             Settings
           </h1>
-          <p className="mx-auto max-w-2xl text-muted-foreground">
+          <p className="max-w-2xl mx-auto text-muted-foreground">
             Customize your search experience
           </p>
         </div>
 
-        <div className="mx-auto space-y-12 max-w-2xl">
+        <div className="max-w-2xl mx-auto space-y-12">
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold">Favorites</h2>
-            <div className="flex justify-between items-center mb-4">
-              <p className="text-sm text-muted-foreground">Add your favorite websites for quick access on the homepage</p>
-              <div className="flex gap-2 items-center">
-                <Label className="text-sm text-muted-foreground">Show on homepage</Label>
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-sm text-muted-foreground">
+                Add your favorite websites for quick access on the homepage
+              </p>
+              <div className="flex items-center gap-2">
+                <Label className="text-sm text-muted-foreground">
+                  Show on homepage
+                </Label>
                 <Switch
                   checked={settings.showFavorites}
-                  onCheckedChange={(checked) => updateSettings({ showFavorites: checked })}
+                  onCheckedChange={(checked) =>
+                    updateSettings({ showFavorites: checked })
+                  }
                 />
               </div>
             </div>
@@ -184,13 +190,15 @@ export default function SettingsPage() {
                 {favorites.map((favorite, index) => (
                   <div
                     key={index}
-                    className="overflow-hidden relative p-4 rounded-lg border transition-colors group bg-card hover:bg-accent/50"
+                    className="relative p-4 overflow-hidden transition-colors border rounded-lg group bg-card hover:bg-accent/50"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r opacity-0 transition-opacity from-purple-500/10 to-pink-500/10 group-hover:opacity-100" />
-                    <div className="flex relative justify-between items-center">
+                    <div className="absolute inset-0 transition-opacity opacity-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 group-hover:opacity-100" />
+                    <div className="relative flex items-center justify-between">
                       <div>
                         <h3 className="font-semibold">{favorite.name}</h3>
-                        <p className="text-sm text-muted-foreground">{favorite.url}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {favorite.url}
+                        </p>
                       </div>
                       <Button
                         variant="ghost"
@@ -218,7 +226,7 @@ export default function SettingsPage() {
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold">Search Preferences</h2>
             <div className="space-y-6">
-              <div className="flex justify-between items-center p-4 rounded-lg border">
+              <div className="flex items-center justify-between p-4 border rounded-lg">
                 <div className="space-y-0.5">
                   <Label>Default Search Engine</Label>
                   <p className="text-sm text-muted-foreground">
@@ -233,9 +241,11 @@ export default function SettingsPage() {
                       className="w-[200px] justify-between"
                     >
                       {settings.defaultEngine
-                        ? bangs.find((bang) => bang.t === settings.defaultEngine)?.s || "Select engine..."
+                        ? bangs.find(
+                            (bang) => bang.t === settings.defaultEngine
+                          )?.s || "Select engine..."
                         : "Select engine..."}
-                      <ChevronsUpDown className="ml-2 w-4 h-4 opacity-50 shrink-0" />
+                      <ChevronsUpDown className="w-4 h-4 ml-2 opacity-50 shrink-0" />
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-[200px] p-0">
@@ -249,13 +259,15 @@ export default function SettingsPage() {
                               key={bang.t}
                               value={bang.t}
                               onSelect={(currentValue) => {
-                                updateDefaultEngine(currentValue)
+                                updateDefaultEngine(currentValue);
                               }}
                             >
                               <Check
                                 className={cn(
                                   "mr-2 h-4 w-4",
-                                  settings.defaultEngine === bang.t ? "opacity-100" : "opacity-0"
+                                  settings.defaultEngine === bang.t
+                                    ? "opacity-100"
+                                    : "opacity-0"
                                 )}
                               />
                               {bang.s} (!{bang.t})
@@ -268,7 +280,7 @@ export default function SettingsPage() {
                 </Popover>
               </div>
 
-              <div className="flex justify-between items-center p-4 rounded-lg border">
+              <div className="flex items-center justify-between p-4 border rounded-lg">
                 <div className="space-y-0.5">
                   <Label>Open in New Tab</Label>
                   <p className="text-sm text-muted-foreground">
@@ -277,11 +289,13 @@ export default function SettingsPage() {
                 </div>
                 <Switch
                   checked={settings.openInNewTab}
-                  onCheckedChange={(checked) => updateSettings({ openInNewTab: checked })}
+                  onCheckedChange={(checked) =>
+                    updateSettings({ openInNewTab: checked })
+                  }
                 />
               </div>
 
-              <div className="flex justify-between items-center p-4 rounded-lg border">
+              <div className="flex items-center justify-between p-4 border rounded-lg">
                 <div className="space-y-0.5">
                   <Label>Auto-focus Search</Label>
                   <p className="text-sm text-muted-foreground">
@@ -290,7 +304,9 @@ export default function SettingsPage() {
                 </div>
                 <Switch
                   checked={settings.autoFocus}
-                  onCheckedChange={(checked) => updateSettings({ autoFocus: checked })}
+                  onCheckedChange={(checked) =>
+                    updateSettings({ autoFocus: checked })
+                  }
                 />
               </div>
             </div>
@@ -300,5 +316,5 @@ export default function SettingsPage() {
 
       <Footer />
     </div>
-  )
+  );
 }

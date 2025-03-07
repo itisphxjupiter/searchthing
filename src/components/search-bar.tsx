@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { bangs } from "@/app/bang";
+import { bangs } from "@/lib/bang";
 import { useRouter } from "next/navigation";
 
 export function SearchBar() {
