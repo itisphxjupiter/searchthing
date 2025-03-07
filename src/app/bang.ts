@@ -1,4 +1,5 @@
 export const bangs = [
+  // Search Engines
   {
     c: "Search",
     d: "www.google.com",
@@ -22,6 +23,46 @@ export const bangs = [
     sc: "Search",
     t: "b",
     u: "https://www.bing.com/search?q={{{s}}}",
+  },
+  {
+    c: "Search",
+    d: "www.startpage.com",
+    s: "Startpage",
+    sc: "Search",
+    t: "sp",
+    u: "https://www.startpage.com/do/search?q={{{s}}}",
+  },
+  {
+    c: "Search",
+    d: "www.ecosia.org",
+    s: "Ecosia",
+    sc: "Search",
+    t: "eco",
+    u: "https://www.ecosia.org/search?q={{{s}}}",
+  },
+  {
+    c: "Search",
+    d: "kagi.com",
+    s: "Kagi",
+    sc: "Search",
+    t: "kg",
+    u: "https://kagi.com/search?q={{{s}}}",
+  },
+  {
+    c: "Search",
+    d: "search.brave.com",
+    s: "Brave Search",
+    sc: "Search",
+    t: "br",
+    u: "https://search.brave.com/search?q={{{s}}}",
+  },
+  {
+    c: "Search",
+    d: "www.qwant.com",
+    s: "Qwant",
+    sc: "Search",
+    t: "qw",
+    u: "https://www.qwant.com/?q={{{s}}}",
   },
   {
     c: "Wiki",
@@ -236,7 +277,7 @@ export const bangs = [
     d: "spotify.com",
     s: "Spotify",
     sc: "Music",
-    t: "sp",
+    t: "spotify",
     u: "https://open.spotify.com/search/{{{s}}}",
   },
   {
