@@ -9,6 +9,14 @@ export const searchThing = [
   },
   {
     c: "SearchThing",
+    d: "searchthing.xyz/settings",
+    s: "SearchThing",
+    sc: "SearchThing",
+    t: "settings",
+    u: "https://searchthing.xyz/settings",
+  },
+  {
+    c: "SearchThing",
     d: "ko-fi.com/eliasnau",
     s: "Ko-Fi",
     sc: "SearchThing",
