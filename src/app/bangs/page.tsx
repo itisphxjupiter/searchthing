@@ -1,6 +1,6 @@
 "use client"
 
-import { bangs } from "../bang"
+import { bangs } from "@/lib/bang"
 import Link from "next/link"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Footer } from "@/components/footer"
@@ -23,9 +23,9 @@ export default function BangsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
 
   const categories = Array.from(new Set(bangs.map(bang => bang.c)))
-  
+
   const filteredBangs = bangs.filter(bang => {
-    const matchesSearch = search.trim() === "" || 
+    const matchesSearch = search.trim() === "" ||
       bang.s.toLowerCase().includes(search.toLowerCase()) ||
       bang.t.toLowerCase().includes(search.toLowerCase())
     const matchesCategory = !selectedCategory || bang.c === selectedCategory
@@ -33,31 +33,31 @@ export default function BangsPage() {
   })
 
   return (
-    <div className="min-h-screen flex flex-col bg-background relative">
-      <header className="w-full p-4 flex-none">
-        <div className="max-w-5xl mx-auto w-full flex justify-between items-center">
-          <Link 
-            href="/" 
-            className="p-2 text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+    <div className="flex relative flex-col min-h-screen bg-background">
+      <header className="flex-none p-4 w-full">
+        <div className="flex justify-between items-center mx-auto w-full max-w-5xl">
+          <Link
+            href="/"
+            className="flex gap-2 items-center p-2 transition-colors text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft size={18} />
             <span>Back</span>
           </Link>
-          <div className="flex items-center gap-3">
-            <a 
-              href="https://github.com/eliasnau/searchthing" 
-              target="_blank" 
+          <div className="flex gap-3 items-center">
+            <a
+              href="https://github.com/eliasnau/searchthing"
+              target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+              className="flex gap-1 items-center transition-colors text-muted-foreground hover:text-foreground"
             >
               <Github size={18} />
               <span className="text-xs">GitHub</span>
             </a>
-            <a 
-              href="https://ko-fi.com/eliasnau" 
-              target="_blank" 
+            <a
+              href="https://ko-fi.com/eliasnau"
+              target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 px-2 py-1 rounded-md bg-pink-50 dark:bg-pink-950/30 text-pink-600 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900/30 transition-colors"
+              className="flex gap-1 items-center px-2 py-1 text-pink-600 bg-pink-50 rounded-md transition-colors dark:bg-pink-950/30 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900/30"
             >
               <Heart size={14} className="text-pink-500" />
               <span className="text-xs">Donate</span>
@@ -67,22 +67,22 @@ export default function BangsPage() {
         </div>
       </header>
 
-      <main className="flex-1 container max-w-5xl mx-auto px-4 py-12 relative">
-        <div className="text-center space-y-6 mb-12">
-          <h1 className="text-4xl sm:text-6xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
+      <main className="container relative flex-1 px-4 py-12 mx-auto max-w-5xl">
+        <div className="mb-12 space-y-6 text-center">
+          <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 sm:text-6xl">
             Bang Commands
           </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-muted-foreground">
             Use <code className="bg-muted px-1 py-0.5 rounded text-xs">!</code> followed by a command to search directly on your favorite sites.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
-            <div className="bg-muted/50 p-3 rounded-lg">
+          <div className="flex flex-col gap-4 justify-center items-center text-sm sm:flex-row">
+            <div className="p-3 rounded-lg bg-muted/50">
               <code className="font-bold">macbook !a</code>
-              <span className="text-muted-foreground ml-2"> → Search Amazon for "macbook"</span>
+              <span className="ml-2 text-muted-foreground"> → Search Amazon for "macbook"</span>
             </div>
-            <div className="bg-muted/50 p-3 rounded-lg">
+            <div className="p-3 rounded-lg bg-muted/50">
               <code className="font-bold">!yt coding</code>
-              <span className="text-muted-foreground ml-2"> → Search YouTube for "coding"</span>
+              <span className="ml-2 text-muted-foreground"> → Search YouTube for "coding"</span>
             </div>
           </div>
         </div>
@@ -102,11 +102,10 @@ export default function BangsPage() {
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setSelectedCategory(null)}
-              className={`px-4 py-2 rounded-full text-sm transition-colors ${
-                !selectedCategory 
-                  ? 'bg-purple-500 text-white' 
+              className={`px-4 py-2 rounded-full text-sm transition-colors ${!selectedCategory
+                  ? 'text-white bg-purple-500'
                   : 'bg-muted hover:bg-muted/80'
-              }`}
+                }`}
             >
               All
             </button>
@@ -114,11 +113,10 @@ export default function BangsPage() {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm transition-colors ${
-                  selectedCategory === category 
-                    ? 'bg-purple-500 text-white' 
+                className={`px-4 py-2 rounded-full text-sm transition-colors ${selectedCategory === category
+                    ? 'bg-purple-500 text-white'
                     : 'bg-muted hover:bg-muted/80'
-                }`}
+                  }`}
               >
                 {category}
               </button>
@@ -127,20 +125,20 @@ export default function BangsPage() {
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filteredBangs.map((bang) => (
-              <div 
+              <div
                 key={bang.t}
-                className="group relative overflow-hidden rounded-lg border bg-card p-6 hover:bg-accent/50 transition-colors"
+                className="overflow-hidden relative p-6 rounded-lg border transition-colors group bg-card hover:bg-accent/50"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-r opacity-0 transition-opacity from-purple-500/10 to-pink-500/10 group-hover:opacity-100" />
                 <div className="relative space-y-2">
-                  <div className="flex items-center justify-between">
+                  <div className="flex justify-between items-center">
                     <h2 className="text-xl font-semibold">{bang.s}</h2>
-                    <code className="text-xs bg-muted px-2 py-1 rounded">
+                    <code className="px-2 py-1 text-xs rounded bg-muted">
                       !{bang.t}
                     </code>
                   </div>
-                  <p className="font-medium text-sm">{bang.c}</p>
-                  <p className="text-sm text-muted-foreground break-all">
+                  <p className="text-sm font-medium">{bang.c}</p>
+                  <p className="text-sm break-all text-muted-foreground">
                     {bang.u.replace('{{{s}}}', 'query')}
                   </p>
                 </div>
@@ -148,11 +146,11 @@ export default function BangsPage() {
             ))}
           </div>
         </div>
-        
+
         <Dialog>
           <DialogTrigger asChild>
-            <Button 
-              className="fixed bottom-6 right-6 z-10 bg-foreground text-background hover:bg-foreground/90 border-0 shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2 rounded-full h-14 w-14 p-0 justify-center"
+            <Button
+              className="flex fixed right-6 bottom-6 z-10 gap-2 justify-center items-center p-0 w-14 h-14 rounded-full border-0 shadow-lg transition-all duration-200 bg-foreground text-background hover:bg-foreground/90 hover:shadow-xl"
               aria-label="Add Bang"
             >
               <Plus size={24} />
@@ -160,53 +158,53 @@ export default function BangsPage() {
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
+              <DialogTitle className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
                 Contribute a Bang
               </DialogTitle>
               <DialogDescription className="text-base">
                 Help improve SearchThing by adding your favorite site
               </DialogDescription>
             </DialogHeader>
-            
-            <div className="space-y-6 py-4">
-              <div className="space-y-3 rounded-lg border p-4 hover:bg-accent/50 transition-colors">
-                <h3 className="font-semibold flex items-center gap-2">
+
+            <div className="py-4 space-y-6">
+              <div className="p-4 space-y-3 rounded-lg border transition-colors hover:bg-accent/50">
+                <h3 className="flex gap-2 items-center font-semibold">
                   <Github size={18} />
                   Create a Pull Request
                 </h3>
                 <p className="text-sm text-muted-foreground">
                   Add your bang to the repository by submitting a PR on GitHub.
                 </p>
-                <Button 
-                  variant="outline" 
-                  className="w-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20 transition-all duration-200"
+                <Button
+                  variant="outline"
+                  className="w-full bg-gradient-to-r transition-all duration-200 from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20"
                   onClick={() => window.open("https://github.com/eliasnau/searchthing", "_blank")}
                 >
                   Open GitHub Repository
                 </Button>
               </div>
-              
-              <div className="space-y-3 rounded-lg border p-4 hover:bg-accent/50 transition-colors">
-                <h3 className="font-semibold flex items-center gap-2">
+
+              <div className="p-4 space-y-3 rounded-lg border transition-colors hover:bg-accent/50">
+                <h3 className="flex gap-2 items-center font-semibold">
                   <Mail size={18} />
                   Send an Email
                 </h3>
                 <p className="text-sm text-muted-foreground">
                   Email us with the site name, URL pattern, and preferred bang command.
                 </p>
-                <Button 
+                <Button
                   variant="outline"
-                  className="w-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20 transition-all duration-200"
+                  className="w-full bg-gradient-to-r transition-all duration-200 from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20"
                   onClick={() => window.location.href = "mailto:contact@eliasnau.dev?subject=New%20Bang%20Suggestion"}
                 >
                   Send Email
                 </Button>
               </div>
-              
-              <div className="space-y-3 rounded-lg border p-4">
+
+              <div className="p-4 space-y-3 rounded-lg border">
                 <h3 className="font-semibold">Bang Format</h3>
-                <pre className="bg-muted p-3 rounded-md text-xs overflow-auto font-mono">
-{`{
+                <pre className="overflow-auto p-3 font-mono text-xs rounded-md bg-muted">
+                  {`{
   c: "Category",     // Main category
   d: "domain.com",   // Base domain
   s: "Site Name",    // Display name
@@ -218,7 +216,7 @@ export default function BangsPage() {
               </div>
             </div>
             <DialogClose asChild>
-              <Button 
+              <Button
                 className="w-full bg-foreground text-background hover:bg-foreground/90"
               >
                 Close

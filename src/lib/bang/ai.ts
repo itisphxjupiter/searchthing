@@ -1,0 +1,42 @@
+export const ai = [
+    {
+        c: "AI",
+        d: "www.t3.chat",
+        s: "T3 Chat",
+        sc: "AI",
+        t: "t3",
+        u: "https://www.t3.chat/new?q={{{s}}}",
+    },
+    {
+        c: "AI",
+        d: "chat.openai.com",
+        s: "ChatGPT",
+        sc: "AI",
+        t: "gpt",
+        u: "https://chat.openai.com/?q={{{s}}}",
+    },
+    {
+        c: "AI",
+        d: "claude.ai",
+        s: "Claude",
+        sc: "AI",
+        t: "cla",
+        u: "https://claude.ai/new?q={{{s}}}",
+    },
+    {
+        c: "AI",
+        d: "perplexity.ai",
+        s: "Perplexity",
+        sc: "AI",
+        t: "per",
+        u: "https://www.perplexity.ai/search?q={{{s}}}",
+    },
+    {
+        c: "AI",
+        d: "huggingface.co",
+        s: "Hugging Face",
+        sc: "AI",
+        t: "hf",
+        u: "https://huggingface.co/spaces?query={{{s}}}",
+    },
+];

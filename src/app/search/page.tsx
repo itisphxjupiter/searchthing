@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { bangs } from "../bang";
+import { bangs } from "@/lib/bang";
 
 function SearchContent() {
   const router = useRouter();
