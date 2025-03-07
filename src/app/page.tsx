@@ -78,19 +78,16 @@ export default function Home() {
 
       <main className="flex flex-col items-center justify-center flex-1 w-full max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
         <div className="w-full max-w-2xl mx-auto space-y-6 text-center">
-          {/* Title */}
           <div>
             <h1 className="text-4xl font-bold text-transparent truncate sm:text-6xl bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text">
               SearchThing
             </h1>
           </div>
 
-          {/* Search bar */}
           <SearchBar />
 
-          {/* Favorites */}
           {!favoritesLoaded ? (
-            <div className="h-6"></div> // Empty placeholder with same height
+            <div className="h-6"></div>
           ) : favorites.length > 0 ? (
             <div className="flex flex-wrap justify-center gap-2">
               {favorites.map((favorite) => (
@@ -116,7 +113,6 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Bang commands info and Add to Chrome - positioned between main and footer */}
       <div className="w-full max-w-5xl px-4 mx-auto mb-8 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <div className="text-sm text-center text-muted-foreground sm:text-left">
