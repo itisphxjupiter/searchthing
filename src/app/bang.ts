@@ -21,8 +21,8 @@ export const bangs = [
     s: "Bing",
     sc: "Search",
     t: "b",
-    u: "https://www.bing.com/search?q={{{s}}}"
-},
+    u: "https://www.bing.com/search?q={{{s}}}",
+  },
   {
     c: "Wiki",
     d: "www.wikipedia.org",
@@ -69,16 +69,16 @@ export const bangs = [
     s: "Facebook",
     sc: "Social",
     t: "fb",
-    u: "https://www.facebook.com/search/top?q={{{s}}}"
-},
-{
-  c: "Social",
-  d: "instagram.com",
-  s: "Instagram",
-  sc: "Social",
-  t: "insta",
-  u: "https://www.instagram.com/explore/tags/{{{s}}}/"
-},
+    u: "https://www.facebook.com/search/top?q={{{s}}}",
+  },
+  {
+    c: "Social",
+    d: "instagram.com",
+    s: "Instagram",
+    sc: "Social",
+    t: "insta",
+    u: "https://www.instagram.com/explore/tags/{{{s}}}/",
+  },
   {
     c: "Shopping",
     d: "www.ebay.com",
@@ -157,8 +157,8 @@ export const bangs = [
     s: "Vimeo",
     sc: "Video",
     t: "vi",
-    u: "https://vimeo.com/search?q={{{s}}}"
-},
+    u: "https://vimeo.com/search?q={{{s}}}",
+  },
   {
     c: "AI",
     d: "www.t3.chat",
@@ -197,8 +197,8 @@ export const bangs = [
     s: "Hugging Face",
     sc: "AI",
     t: "hf",
-    u: "https://huggingface.co/spaces?query={{{s}}}"
-},
+    u: "https://huggingface.co/spaces?query={{{s}}}",
+  },
   {
     c: "Maps",
     d: "maps.google.com",
@@ -229,15 +229,7 @@ export const bangs = [
     s: "Dev.to",
     sc: "Dev",
     t: "dev",
-    u: "https://dev.to/search?q={{{s}}}"
-},
-  {
-    c: "Shopping",
-    d: "amazon.com",
-    s: "Amazon",
-    sc: "Shopping",
-    t: "a",
-    u: "https://www.amazon.com/s?k={{{s}}}",
+    u: "https://dev.to/search?q={{{s}}}",
   },
   {
     c: "Music",
@@ -254,6 +246,14 @@ export const bangs = [
     sc: "Music",
     t: "sc",
     u: "https://soundcloud.com/search?q={{{s}}}",
+  },
+  {
+    c: "Shopping",
+    d: "idealo.co.uk",
+    s: "Idealo",
+    sc: "Shopping",
+    t: "id",
+    u: "https://www.idealo.co.uk/mscat.html?q={{{s}}}",
   },
   {
     c: "Shopping",
@@ -317,15 +317,14 @@ export const bangs = [
     s: "Google News",
     sc: "News",
     t: "gn",
-    u: "https://news.google.com/search?q={{{s}}}"
-},
-{
-  c: "News",
-  d: "bbc.com",
-  s: "BBC News",
-  sc: "News",
-  t: "bbc",
-  u: "https://www.bbc.co.uk/search?q={{{s}}}"
-},
-
+    u: "https://news.google.com/search?q={{{s}}}",
+  },
+  {
+    c: "News",
+    d: "bbc.com",
+    s: "BBC News",
+    sc: "News",
+    t: "bbc",
+    u: "https://www.bbc.co.uk/search?q={{{s}}}",
+  },
 ];

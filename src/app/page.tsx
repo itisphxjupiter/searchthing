@@ -28,15 +28,15 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-between bg-background">
+    <div className="flex flex-col items-center justify-between min-h-screen bg-background">
       <header className="w-full p-4">
-        <div className="max-w-5xl mx-auto w-full flex justify-end items-center gap-2">
+        <div className="flex items-center justify-end w-full max-w-5xl gap-2 mx-auto">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
                   href="/bangs"
-                  className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                  className="p-2 transition-colors text-muted-foreground hover:text-foreground"
                   aria-label="Bang Commands"
                 >
                   <CircleAlert size={18} />
@@ -51,7 +51,7 @@ export default function Home() {
               <TooltipTrigger asChild>
                 <Link
                   href="/settings"
-                  className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                  className="p-2 transition-colors text-muted-foreground hover:text-foreground"
                   aria-label="Settings"
                 >
                   <Settings size={18} />
@@ -76,11 +76,11 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center space-y-6 w-full max-w-2xl mx-auto">
+      <main className="flex flex-col items-center justify-center flex-1 w-full max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
+        <div className="w-full max-w-2xl mx-auto space-y-6 text-center">
           {/* Title */}
           <div>
-            <h1 className="text-4xl sm:text-6xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text truncate">
+            <h1 className="text-4xl font-bold text-transparent truncate sm:text-6xl bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text">
               SearchThing
             </h1>
           </div>
@@ -97,7 +97,7 @@ export default function Home() {
                 <a
                   key={favorite.url}
                   href={favorite.url}
-                  className="px-3 py-1 bg-muted hover:bg-muted/80 rounded-full text-xs font-medium text-muted-foreground transition-colors"
+                  className="px-3 py-1 text-xs font-medium transition-colors rounded-full bg-muted hover:bg-muted/80 text-muted-foreground"
                 >
                   {favorite.name}
                 </a>
@@ -107,7 +107,7 @@ export default function Home() {
             <div className="text-sm text-muted-foreground">
               <Link
                 href="/settings"
-                className="text-purple-500 hover:text-purple-600 transition-colors"
+                className="text-purple-500 transition-colors hover:text-purple-600"
               >
                 Add favorites in settings
               </Link>
@@ -117,9 +117,9 @@ export default function Home() {
       </main>
 
       {/* Bang commands info and Add to Chrome - positioned between main and footer */}
-      <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="text-sm text-muted-foreground text-center sm:text-left">
+      <div className="w-full max-w-5xl px-4 mx-auto mb-8 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <div className="text-sm text-center text-muted-foreground sm:text-left">
             <p className="mb-1">
               Use{" "}
               <code className="bg-muted px-1 py-0.5 rounded text-xs">!</code>{" "}
@@ -131,7 +131,7 @@ export default function Home() {
             </p>
             <Link
               href="/bangs"
-              className="text-purple-500 hover:text-purple-600 font-medium inline-block"
+              className="inline-block font-medium text-purple-500 hover:text-purple-600"
             >
               View all bang commands
             </Link>
@@ -144,13 +144,13 @@ export default function Home() {
       </div>
 
       <footer className="w-full p-4">
-        <div className="max-w-5xl mx-auto w-full flex flex-col-reverse sm:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
+        <div className="flex flex-col-reverse items-center justify-between w-full max-w-5xl gap-4 mx-auto text-xs sm:flex-row text-muted-foreground">
           <div className="flex items-center gap-4">
             <a
               href="https://github.com/eliasnau/searchthing"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-foreground transition-colors flex items-center gap-1"
+              className="flex items-center gap-1 transition-colors hover:text-foreground"
             >
               <Github size={14} />
               <span>GitHub</span>
@@ -159,7 +159,7 @@ export default function Home() {
               href="https://ko-fi.com/eliasnau"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 px-2 py-1 rounded-md bg-pink-50 dark:bg-pink-950/30 text-pink-600 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900/30 transition-colors"
+              className="flex items-center gap-1 px-2 py-1 text-pink-600 transition-colors rounded-md bg-pink-50 dark:bg-pink-950/30 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900/30"
             >
               <Heart size={14} className="text-pink-500" />
               <span>Donate</span>
@@ -169,13 +169,13 @@ export default function Home() {
           <div className="flex items-center gap-4 mb-3 sm:mb-0">
             <Link
               href="/legal/privacy"
-              className="hover:text-foreground transition-colors"
+              className="transition-colors hover:text-foreground"
             >
               Privacy
             </Link>
             <Link
               href="/legal/terms"
-              className="hover:text-foreground transition-colors"
+              className="transition-colors hover:text-foreground"
             >
               Terms
             </Link>
