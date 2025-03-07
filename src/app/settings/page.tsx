@@ -56,7 +56,6 @@ export default function SettingsPage() {
     showFavorites: true,
     autoFocus: true,
   });
-
   useEffect(() => {
     const saved = localStorage.getItem("favorites");
     if (saved) {
@@ -66,7 +65,6 @@ export default function SettingsPage() {
     if (savedSettings) {
       setSettings(JSON.parse(savedSettings));
     }
-    // Check for defaultEngine in localStorage
     const savedEngine = localStorage.getItem("defaultEngine");
     if (savedEngine) {
       setSettings((prev) => ({ ...prev, defaultEngine: savedEngine }));
@@ -100,21 +98,21 @@ export default function SettingsPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <header className="flex-none w-full p-4">
-        <div className="flex items-center justify-between w-full max-w-5xl mx-auto">
+      <header className="flex-none p-4 w-full">
+        <div className="flex justify-between items-center mx-auto w-full max-w-5xl">
           <Link
             href="/"
-            className="flex items-center gap-2 p-2 transition-colors text-muted-foreground hover:text-foreground"
+            className="flex gap-2 items-center p-2 transition-colors text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft size={18} />
             <span>Back</span>
           </Link>
-          <div className="flex items-center gap-3">
+          <div className="flex gap-3 items-center">
             <a
               href="https://github.com/eliasnau/searchthing"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 transition-colors text-muted-foreground hover:text-foreground"
+              className="flex gap-1 items-center transition-colors text-muted-foreground hover:text-foreground"
             >
               <Github size={18} />
               <span className="text-xs">GitHub</span>
@@ -123,7 +121,7 @@ export default function SettingsPage() {
               href="https://ko-fi.com/eliasnau"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 px-2 py-1 text-pink-600 transition-colors rounded-md bg-pink-50 dark:bg-pink-950/30 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900/30"
+              className="flex gap-1 items-center px-2 py-1 text-pink-600 bg-pink-50 rounded-md transition-colors dark:bg-pink-950/30 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900/30"
             >
               <Heart size={14} className="text-pink-500" />
               <span className="text-xs">Donate</span>
@@ -133,24 +131,24 @@ export default function SettingsPage() {
         </div>
       </header>
 
-      <main className="container relative flex-1 max-w-5xl px-4 py-12 mx-auto">
+      <main className="container relative flex-1 px-4 py-12 mx-auto max-w-5xl">
         <div className="mb-12 space-y-4 text-center">
           <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 sm:text-6xl">
             Settings
           </h1>
-          <p className="max-w-2xl mx-auto text-muted-foreground">
+          <p className="mx-auto max-w-2xl text-muted-foreground">
             Customize your search experience
           </p>
         </div>
 
-        <div className="max-w-2xl mx-auto space-y-12">
+        <div className="mx-auto space-y-12 max-w-2xl">
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold">Favorites</h2>
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex justify-between items-center mb-4">
               <p className="text-sm text-muted-foreground">
                 Add your favorite websites for quick access on the homepage
               </p>
-              <div className="flex items-center gap-2">
+              <div className="flex gap-2 items-center">
                 <Label className="text-sm text-muted-foreground">
                   Show on homepage
                 </Label>
@@ -190,10 +188,10 @@ export default function SettingsPage() {
                 {favorites.map((favorite, index) => (
                   <div
                     key={index}
-                    className="relative p-4 overflow-hidden transition-colors border rounded-lg group bg-card hover:bg-accent/50"
+                    className="overflow-hidden relative p-4 rounded-lg border transition-colors group bg-card hover:bg-accent/50"
                   >
-                    <div className="absolute inset-0 transition-opacity opacity-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 group-hover:opacity-100" />
-                    <div className="relative flex items-center justify-between">
+                    <div className="absolute inset-0 bg-gradient-to-r opacity-0 transition-opacity from-purple-500/10 to-pink-500/10 group-hover:opacity-100" />
+                    <div className="flex relative justify-between items-center">
                       <div>
                         <h3 className="font-semibold">{favorite.name}</h3>
                         <p className="text-sm text-muted-foreground">
@@ -226,7 +224,7 @@ export default function SettingsPage() {
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold">Search Preferences</h2>
             <div className="space-y-6">
-              <div className="flex items-center justify-between p-4 border rounded-lg">
+              <div className="flex justify-between items-center p-4 rounded-lg border">
                 <div className="space-y-0.5">
                   <Label>Default Search Engine</Label>
                   <p className="text-sm text-muted-foreground">
@@ -242,10 +240,10 @@ export default function SettingsPage() {
                     >
                       {settings.defaultEngine
                         ? bangs.find(
-                            (bang) => bang.t === settings.defaultEngine
-                          )?.s || "Select engine..."
+                          (bang) => bang.t === settings.defaultEngine
+                        )?.s || "Select engine..."
                         : "Select engine..."}
-                      <ChevronsUpDown className="w-4 h-4 ml-2 opacity-50 shrink-0" />
+                      <ChevronsUpDown className="ml-2 w-4 h-4 opacity-50 shrink-0" />
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-[200px] p-0">
@@ -257,9 +255,10 @@ export default function SettingsPage() {
                           {bangs.map((bang) => (
                             <CommandItem
                               key={bang.t}
-                              value={bang.t}
-                              onSelect={(currentValue) => {
-                                updateDefaultEngine(currentValue);
+                              // Fix: Include both name and trigger in the value for better search matching
+                              value={`${bang.s.toLowerCase()} ${bang.t.toLowerCase()}`}
+                              onSelect={() => {
+                                updateDefaultEngine(bang.t);
                               }}
                             >
                               <Check
@@ -280,7 +279,7 @@ export default function SettingsPage() {
                 </Popover>
               </div>
 
-              <div className="flex items-center justify-between p-4 border rounded-lg">
+              <div className="flex justify-between items-center p-4 rounded-lg border">
                 <div className="space-y-0.5">
                   <Label>Open in New Tab</Label>
                   <p className="text-sm text-muted-foreground">
@@ -295,7 +294,7 @@ export default function SettingsPage() {
                 />
               </div>
 
-              <div className="flex items-center justify-between p-4 border rounded-lg">
+              <div className="flex justify-between items-center p-4 rounded-lg border">
                 <div className="space-y-0.5">
                   <Label>Auto-focus Search</Label>
                   <p className="text-sm text-muted-foreground">
