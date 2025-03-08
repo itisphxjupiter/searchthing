@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { X, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from 'next/navigation';
 
 interface IntroPopupProps {
     onDismiss?: () => void;
@@ -11,6 +12,7 @@ interface IntroPopupProps {
 export function IntroPopup({ onDismiss }: IntroPopupProps) {
     const [showIntro, setShowIntro] = useState(false);
     const [introChecked, setIntroChecked] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         // Check intro dismissed status
@@ -38,6 +40,15 @@ export function IntroPopup({ onDismiss }: IntroPopupProps) {
         if (onDismiss) {
             onDismiss();
         }
+    };
+
+    const startOnboarding = () => {
+        localStorage.setItem("introDismissed", "true");
+        setShowIntro(false);
+        if (onDismiss) {
+            onDismiss();
+        }
+        router.push("/onboarding");
     };
 
     if (!introChecked || !showIntro) {
@@ -81,9 +92,9 @@ export function IntroPopup({ onDismiss }: IntroPopupProps) {
                             variant="outline"
                             size="sm"
                             className="text-xs"
-                            onClick={() => dismissIntro(false)}
+                            onClick={startOnboarding}
                         >
-                            Dismiss
+                            Take the tour
                         </Button>
                         <Button
                             size="sm"
