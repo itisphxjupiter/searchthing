@@ -1,6 +1,14 @@
 export const shopping = [
   {
     c: "Shopping",
+    d: "amazon.com",
+    s: "Amazon",
+    sc: "Shopping",
+    t: "a",
+    u: "https://www.amazon.com/s?k={{{s}}}",
+  },
+  {
+    c: "Shopping",
     d: "idealo.co.uk",
     s: "Idealo",
     sc: "Shopping",
