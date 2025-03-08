@@ -92,7 +92,7 @@ export function IntroPopup({ onDismiss }: IntroPopupProps) {
                             variant="outline"
                             size="sm"
                             className="text-xs"
-                            onClick={learnMore}
+                            onClick={() => dismissIntro(false)}
                         >
                             Next Time
                         </Button>
