@@ -16,31 +16,24 @@ export function OnboardingTrigger({
   size = "default",
   className = ""
 }: OnboardingTriggerProps) {
-  const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(true);
   const router = useRouter();
 
-  useEffect(() => {
-    const onboardingCompleted = localStorage.getItem("onboardingCompleted");
-    setHasCompletedOnboarding(onboardingCompleted === "true");
-  }, []);
-
-  const startOnboarding = () => {
+  const handleClick = () => {
+    // Reset onboarding completed flag
+    localStorage.removeItem("onboardingCompleted");
+    // Navigate to onboarding page
     router.push("/onboarding");
   };
-
-  if (hasCompletedOnboarding) {
-    return null;
-  }
 
   return (
     <Button
       variant={variant}
       size={size}
-      onClick={startOnboarding}
-      className={`animate-pulse ${className}`}
+      className={className}
+      onClick={handleClick}
     >
       <Sparkles className="mr-2 w-4 h-4" />
-      Take the tour
+      Restart Tutorial
     </Button>
   );
 }

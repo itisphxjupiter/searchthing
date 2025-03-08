@@ -33,6 +33,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { OnboardingTrigger } from "@/components/onboarding-trigger";
 
 export interface Favorite {
   name: string;
@@ -307,6 +308,22 @@ export default function SettingsPage() {
                     updateSettings({ autoFocus: checked })
                   }
                 />
+              </div>
+            </div>
+          </div>
+
+          <Separator />
+          <div className="p-6 mb-8 rounded-lg border bg-card">
+            <h2 className="mb-4 text-xl font-semibold">Onboarding</h2>
+            <div className="flex flex-col gap-4">
+              <div className="flex justify-between items-center">
+                <div>
+                  <p className="font-medium">Restart Onboarding</p>
+                  <p className="text-sm text-muted-foreground">
+                    Go through the onboarding tutorial again
+                  </p>
+                </div>
+                <OnboardingTrigger variant="outline" />
               </div>
             </div>
           </div>

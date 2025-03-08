@@ -34,7 +34,7 @@ export function IntroPopup({ onDismiss }: IntroPopupProps) {
     };
 
     const learnMore = () => {
-        window.open("https://github.com/eliasnau/searchthing", "_blank");
+        window.open("/onboarding", "_blank");
         localStorage.setItem("introDismissed", "true");
         setShowIntro(false);
         if (onDismiss) {
@@ -92,16 +92,16 @@ export function IntroPopup({ onDismiss }: IntroPopupProps) {
                             variant="outline"
                             size="sm"
                             className="text-xs"
-                            onClick={startOnboarding}
+                            onClick={learnMore}
                         >
-                            Take the tour
+                            Next Time
                         </Button>
                         <Button
                             size="sm"
                             className="text-xs text-white bg-gradient-to-r from-purple-500 to-pink-500 border-0 hover:from-purple-600 hover:to-pink-600"
-                            onClick={learnMore}
+                            onClick={startOnboarding}
                         >
-                            Learn More
+                            Take the tour
                         </Button>
                     </div>
                 </div>
