@@ -3,6 +3,7 @@ import { SearchBar } from "@/components/search-bar";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Footer } from "@/components/footer";
 import { AddToChrome } from "@/components/add-to-chrome";
+import { IntroPopup } from "@/components/intro-popup";
 import Link from "next/link";
 import { Settings, CircleAlert, Heart, Github, Chrome } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -14,23 +15,17 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { SocialLinks } from "@/components/social-links";
+import { X, Info } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [favorites, setFavorites] = useState<Favorite[]>([]);
   const [favoritesLoaded, setFavoritesLoaded] = useState(false);
 
-  useEffect(() => {
-    const saved = localStorage.getItem("favorites");
-    if (saved) {
-      setFavorites(JSON.parse(saved));
-    }
-    setFavoritesLoaded(true);
-  }, []);
-
   return (
-    <div className="flex flex-col items-center justify-between min-h-screen bg-background">
-      <header className="w-full p-4">
-        <div className="flex items-center justify-end w-full max-w-5xl gap-2 mx-auto">
+    <div className="flex flex-col min-h-screen bg-background">
+      <header className="p-4 w-full">
+        <div className="flex gap-2 justify-end items-center mx-auto w-full max-w-5xl">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -75,11 +70,11 @@ export default function Home() {
           </TooltipProvider>
         </div>
       </header>
-
-      <main className="flex flex-col items-center justify-center flex-1 w-full max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
-        <div className="w-full max-w-2xl mx-auto space-y-6 text-center">
+      <IntroPopup />
+      <main className="flex flex-col flex-1 justify-center items-center px-4 mx-auto w-full max-w-5xl sm:px-6 lg:px-8">
+        <div className="mx-auto space-y-6 w-full max-w-2xl text-center">
           <div>
-            <h1 className="text-4xl font-bold text-transparent truncate sm:text-6xl bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text">
+            <h1 className="text-4xl font-bold text-transparent truncate bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 sm:text-6xl">
               SearchThing
             </h1>
           </div>
@@ -89,12 +84,12 @@ export default function Home() {
           {!favoritesLoaded ? (
             <div className="h-6"></div>
           ) : favorites.length > 0 ? (
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="flex flex-wrap gap-2 justify-center">
               {favorites.map((favorite) => (
                 <a
                   key={favorite.url}
                   href={favorite.url}
-                  className="px-3 py-1 text-xs font-medium transition-colors rounded-full bg-muted hover:bg-muted/80 text-muted-foreground"
+                  className="px-3 py-1 text-xs font-medium rounded-full transition-colors bg-muted hover:bg-muted/80 text-muted-foreground"
                 >
                   {favorite.name}
                 </a>
@@ -113,8 +108,8 @@ export default function Home() {
         </div>
       </main>
 
-      <div className="w-full max-w-5xl px-4 mx-auto mb-8 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+      <div className="px-4 mx-auto mb-8 w-full max-w-5xl sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-4 justify-between items-center sm:flex-row">
           <div className="text-sm text-center text-muted-foreground sm:text-left">
             <p className="mb-1">
               Use{" "}
@@ -139,14 +134,14 @@ export default function Home() {
         </div>
       </div>
 
-      <footer className="w-full p-4">
-        <div className="flex flex-col-reverse items-center justify-between w-full max-w-5xl gap-4 mx-auto text-xs sm:flex-row text-muted-foreground">
-          <div className="flex items-center gap-4">
+      <footer className="p-4 w-full">
+        <div className="flex flex-col-reverse gap-4 justify-between items-center mx-auto w-full max-w-5xl text-xs sm:flex-row text-muted-foreground">
+          <div className="flex gap-4 items-center">
             <a
               href="https://github.com/eliasnau/searchthing"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 transition-colors hover:text-foreground"
+              className="flex gap-1 items-center transition-colors hover:text-foreground"
             >
               <Github size={14} />
               <span>GitHub</span>
@@ -155,14 +150,14 @@ export default function Home() {
               href="https://ko-fi.com/eliasnau"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 px-2 py-1 text-pink-600 transition-colors rounded-md bg-pink-50 dark:bg-pink-950/30 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900/30"
+              className="flex gap-1 items-center px-2 py-1 text-pink-600 bg-pink-50 rounded-md transition-colors dark:bg-pink-950/30 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900/30"
             >
               <Heart size={14} className="text-pink-500" />
               <span>Donate</span>
             </a>
           </div>
 
-          <div className="flex items-center gap-4 mb-3 sm:mb-0">
+          <div className="flex gap-4 items-center mb-3 sm:mb-0">
             <Link
               href="/legal/privacy"
               className="transition-colors hover:text-foreground"
