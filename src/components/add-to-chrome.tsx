@@ -45,7 +45,7 @@ export function AddToChrome() {
             <Button 
               variant="default" 
               className="w-full"
-              onClick={() => window.open('hhttps://chromewebstore.google.com/detail/searchthing/oilahejhenoeljbicconidaicggjemej', '_blank')}
+              onClick={() => window.open('https://chromewebstore.google.com/detail/searchthing/oilahejhenoeljbicconidaicggjemej', '_blank')}
             >
               <Chrome className="mr-2 h-4 w-4" />
               Get Chrome Extension
