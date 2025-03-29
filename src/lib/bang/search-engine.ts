@@ -58,6 +58,14 @@ export const searchEngines = [
     },
     {
         c: "Search",
+        d: "search.surfshark.com",
+        s: "Surfshark Search",
+        sc: "Search",
+        t: "sf",
+        u: "https://search.surfshark.com/results?query={{{s}}}",
+    },
+    {
+        c: "Search",
         d: "www.qwant.com",
         s: "Qwant",
         sc: "Search",
