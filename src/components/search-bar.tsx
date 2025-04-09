@@ -88,10 +88,6 @@ export function SearchBar() {
             }}
             className="py-4 pr-20 pl-12 w-full leading-normal rounded-full border transition-all duration-300 bg-background border-input text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
           />
-          <div className="flex absolute inset-y-0 right-0 items-center pr-4 space-x-2">
-            <Command className="w-5 h-5 text-muted-foreground" />
-            <Globe className="w-5 h-5 text-muted-foreground" />
-          </div>
         </div>
       </div>
     </div>
