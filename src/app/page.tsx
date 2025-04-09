@@ -3,7 +3,6 @@ import { SearchBar } from "@/components/search-bar";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Footer } from "@/components/footer";
 import { AddToChrome } from "@/components/add-to-chrome";
-import { IntroPopup } from "@/components/intro-popup";
 import Link from "next/link";
 import { Settings, CircleAlert, Heart, Github, Chrome } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -22,6 +21,14 @@ export default function Home() {
   const [favorites, setFavorites] = useState<Favorite[]>([]);
   const [favoritesLoaded, setFavoritesLoaded] = useState(false);
 
+  useEffect(() => {
+    const saved = localStorage.getItem("favorites");
+    if (saved) {
+      setFavorites(JSON.parse(saved));
+    }
+    setFavoritesLoaded(true);
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <header className="p-4 w-full">
@@ -30,23 +37,8 @@ export default function Home() {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="/bangs"
-                  className="p-2 transition-colors text-muted-foreground hover:text-foreground"
-                  aria-label="Bang Commands"
-                >
-                  <CircleAlert size={18} />
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Bang Commands</p>
-              </TooltipContent>
-            </Tooltip>
-
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
                   href="/settings"
-                  className="p-2 transition-colors text-muted-foreground hover:text-foreground"
+                  className="p-2 rounded-full transition-colors text-muted-foreground hover:text-foreground hover:bg-background/30"
                   aria-label="Settings"
                 >
                   <Settings size={18} />
@@ -70,11 +62,11 @@ export default function Home() {
           </TooltipProvider>
         </div>
       </header>
-      <IntroPopup />
+
       <main className="flex flex-col flex-1 justify-center items-center px-4 mx-auto w-full max-w-5xl sm:px-6 lg:px-8">
-        <div className="mx-auto space-y-6 w-full max-w-2xl text-center">
-          <div>
-            <h1 className="text-4xl font-bold text-transparent truncate bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 sm:text-6xl">
+        <div className="mx-auto w-full max-w-2xl text-center">
+          <div className="mb-12">
+            <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 animate-gradient">
               SearchThing
             </h1>
           </div>
@@ -82,9 +74,9 @@ export default function Home() {
           <SearchBar />
 
           {!favoritesLoaded ? (
-            <div className="h-6"></div>
+            <div className="mt-6 h-6"></div>
           ) : favorites.length > 0 ? (
-            <div className="flex flex-wrap gap-2 justify-center">
+            <div className="flex flex-wrap gap-2 justify-center mt-6">
               {favorites.map((favorite) => (
                 <a
                   key={favorite.url}
@@ -96,7 +88,7 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <div className="text-sm text-muted-foreground">
+            <div className="mt-6 text-sm text-muted-foreground">
               <Link
                 href="/settings"
                 className="text-purple-500 transition-colors hover:text-purple-600"

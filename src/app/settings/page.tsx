@@ -314,16 +314,19 @@ export default function SettingsPage() {
 
           <Separator />
           <div className="p-6 mb-8 rounded-lg border bg-card">
-            <h2 className="mb-4 text-xl font-semibold">Onboarding</h2>
+            <h2 className="mb-4 text-xl font-semibold">More Features Comming Soon</h2>
             <div className="flex flex-col gap-4">
               <div className="flex justify-between items-center">
                 <div>
-                  <p className="font-medium">Restart Onboarding</p>
+                  <p className="font-medium"></p>
                   <p className="text-sm text-muted-foreground">
-                    Go through the onboarding tutorial again
+                    - Redesign and improving the Code
+                    <br />
+                    - Snippets
+                    <br />
+                    - Per Bang Custom Code
                   </p>
                 </div>
-                <OnboardingTrigger variant="outline" />
               </div>
             </div>
           </div>
