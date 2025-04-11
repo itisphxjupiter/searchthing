@@ -37,10 +37,10 @@ function SearchContent() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-background dark:bg-gray-900">
-      <div className="relative w-16 h-16">
+      {/* <div className="relative w-16 h-16">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-25 blur group-hover:opacity-40"></div>
-        <div className="relative w-full h-full rounded-full border-4 animate-spin border-gray-400/20 border-t-purple-500"></div>
-      </div>
+        <div className="relative w-full h-full rounded-full border-4 animate-[spin_0.3s_linear_infinite] border-gray-400/20 border-t-purple-500"></div>
+      </div> */}
     </div>
   );
 }
@@ -50,7 +50,7 @@ export default function Search() {
     <Suspense
       fallback={
         <div className="flex justify-center items-center min-h-screen bg-background dark:bg-gray-900">
-          <div className="w-16 h-16 rounded-full border-4 animate-spin border-gray-400/20 border-t-purple-500"></div>
+          {/* <div className="w-16 h-16 rounded-full border-4 animate-[spin_0.3s_linear_infinite] border-gray-400/20 border-t-purple-500"></div> */}
         </div>
       }
     >

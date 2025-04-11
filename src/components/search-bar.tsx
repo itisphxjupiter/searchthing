@@ -3,7 +3,7 @@
 import type React from "react";
 
 import { useState, useEffect, useRef } from "react";
-import { Search } from "lucide-react";
+import { Search, Command, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { bangs } from "@/lib/bang";
@@ -64,34 +64,32 @@ export function SearchBar() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full">
+    <div className="px-4 mx-auto w-full max-w-2xl">
       <div className="relative group">
-        <div className="absolute inset-0 transition duration-300 rounded-lg opacity-25 bg-gradient-to-r from-purple-500 to-pink-500 blur group-hover:opacity-40"></div>
-        <div className="relative flex items-center w-full">
-          <div className="relative flex-1">
-            <div className="absolute -translate-y-1/2 left-3 top-1/2 text-muted-foreground">
-              <Search size={18} />
-            </div>
-            <Input
-              ref={inputRef}
-              type="text"
-              placeholder="Search the web..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onFocus={() => {
-                router.prefetch("/search");
-              }}
-              className="w-full py-6 pl-10 pr-20 rounded-lg border-input focus-visible:ring-0 focus-visible:ring-purple-500"
-            />
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-25 blur transition duration-300 group-hover:opacity-40"></div>
+        <div className="relative">
+          <div className="flex absolute inset-y-0 left-0 items-center pl-4">
+            <Search className="w-5 h-5 text-muted-foreground" />
           </div>
-          <Button
-            type="submit"
-            className="absolute px-4 py-2 text-white rounded-md right-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
-          >
-            Search
-          </Button>
+          <input
+            ref={inputRef}
+            type="text"
+            placeholder="Search the web..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onFocus={() => {
+              router.prefetch("/search");
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                handleSubmit(e as unknown as React.FormEvent);
+              }
+            }}
+            className="py-4 pr-20 pl-12 w-full leading-normal rounded-full border transition-all duration-300 bg-background border-input text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+          />
         </div>
       </div>
-    </form>
+    </div>
   );
 }
