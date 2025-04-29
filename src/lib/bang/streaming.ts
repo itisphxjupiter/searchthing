@@ -1,6 +1,14 @@
 export const streaming = [
   {
     c: "Streaming",
+    d: "youtube.com",
+    s: "YouTube",
+    sc: "Streaming",
+    t: "yt",
+    u: "https://www.youtube.com/results?search_query={{{s}}}",
+  },
+  {
+    c: "Streaming",
     d: "movieland.eliasnau.dev",
     s: "MovieLand",
     sc: "Infomrmation",
