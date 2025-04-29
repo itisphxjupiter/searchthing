@@ -1,33 +1,56 @@
-"use client"
-import { useEffect, Suspense } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { bangs } from '@/lib/bang';
+"use client";
+import { useEffect, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { bangs } from "@/lib/bang";
 
 function SearchContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const q = searchParams.get('q');
+  const q = searchParams.get("q");
 
   useEffect(() => {
     if (!q) return;
     let searchUrl;
 
     const query = q;
-    const match = query.match(/!(\S+)/i);
-    const bangCandidate = match?.[1]?.toLowerCase();
+    const bangMatch = query.match(/!(\S+)/i);
+    const bangCandidate = bangMatch?.[1]?.toLowerCase();
 
-    // Get default engine directly from localStorage or use 'g' as fallback
-    const defaultEngine = localStorage.getItem('defaultEngine') || 'g';
+    const shortcutMatches = query.match(/#(\S+)/g) || [];
+    const shortcuts = shortcutMatches.map((match) => match.slice(1).toLowerCase());
 
-    // If bang is provided in search, use it; otherwise use default engine
-    const defaultBang = bangs.find(b => b.t === defaultEngine) || bangs.find(b => b.t === 'g') || bangs[0];
-    const selectedBang = bangCandidate ? (bangs.find(b => b.t === bangCandidate) || defaultBang) : defaultBang;
+    const defaultEngine = localStorage.getItem("defaultEngine") || "g";
 
-    const cleanQuery = query.replace(/!\S+\s*/i, '').trim();
+    const defaultBang =
+      bangs.find((b) => b.t === defaultEngine) ||
+      bangs.find((b) => b.t === "g") ||
+      bangs[0];
+    const selectedBang = bangCandidate
+      ? bangs.find((b) => b.t === bangCandidate) || defaultBang
+      : defaultBang;
+
+    let cleanQuery = query.replace(/!\S+\s*/i, "").trim();
+
+    shortcuts.forEach((shortcut) => {
+      const bangMatch = bangs.find((b) => b.t === shortcut);
+      if (bangMatch && bangMatch.s) {
+        const shortcutRegex = new RegExp(`#${shortcut}\\b`, "g");
+        while (shortcutRegex.test(cleanQuery)) {
+          cleanQuery = cleanQuery
+            .replace(shortcutRegex, bangMatch.s)
+            .replace(/\s+/g, " ")
+            .trim();
+        }
+      }
+    });
+
     if (cleanQuery === "") {
       searchUrl = "https://" + selectedBang.d;
     } else {
-      searchUrl = selectedBang.u.replace('{{{s}}}', encodeURIComponent(cleanQuery).replace(/%2F/g, "/"));
+      searchUrl = selectedBang.u.replace(
+        "{{{s}}}",
+        encodeURIComponent(cleanQuery).replace(/%2F/g, "/")
+      );
     }
 
     if (searchUrl) {
@@ -36,12 +59,7 @@ function SearchContent() {
   }, [q, router]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-background dark:bg-gray-900">
-      {/* <div className="relative w-16 h-16">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-25 blur group-hover:opacity-40"></div>
-        <div className="relative w-full h-full rounded-full border-4 animate-[spin_0.3s_linear_infinite] border-gray-400/20 border-t-purple-500"></div>
-      </div> */}
-    </div>
+    <div className="flex justify-center items-center min-h-screen bg-background dark:bg-gray-900"></div>
   );
 }
 
@@ -49,9 +67,7 @@ export default function Search() {
   return (
     <Suspense
       fallback={
-        <div className="flex justify-center items-center min-h-screen bg-background dark:bg-gray-900">
-          {/* <div className="w-16 h-16 rounded-full border-4 animate-[spin_0.3s_linear_infinite] border-gray-400/20 border-t-purple-500"></div> */}
-        </div>
+        <div className="flex justify-center items-center min-h-screen bg-background dark:bg-gray-900"></div>
       }
     >
       <SearchContent />
