@@ -20,7 +20,7 @@ export const music = [
   d: "music.apple.com",   // Base domain
   s: "Apple Music",    // Display name
   sc: "Music", // Sub-category
-  t: "am",         // Bang command
+  t: "apl",         // Bang command
   u: "https://music.apple.com/us/search?term={{{s}}}"   // Search URL pattern
   }
 ];
